@@ -1,6 +1,8 @@
 package tuan6QuanLiThuVien;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 class ThuVien {
     private ArrayList<Sach> danhSachSach;
@@ -14,11 +16,9 @@ class ThuVien {
         danhSachSach.add(sach);
     }
 
-    // Xuất danh sách sách
-    public void xuatDanhSach() {
-        for (Sach sach : danhSachSach) {
-            System.out.println(sach.toString());
-        }
+    // Trả về danh sách sách
+    public ArrayList<Sach> getDanhSachSach() {
+        return danhSachSach;
     }
 
     // Tính tổng thành tiền sách giáo khoa
@@ -57,11 +57,33 @@ class ThuVien {
     }
 
     // Xuất các sách giáo khoa của nhà xuất bản X
-    public void xuatSachGiaoKhoaNhaXuatBan(String nhaXuatBan) {
+    public ArrayList<Sach> getSachGiaoKhoaNhaXuatBan(String nhaXuatBan) {
+        ArrayList<Sach> result = new ArrayList<>();
         for (Sach sach : danhSachSach) {
             if (sach instanceof SachGiaoKhoa && sach.getNhaXuatBan().equalsIgnoreCase(nhaXuatBan)) {
-                System.out.println(sach.toString());
+                result.add(sach);
             }
         }
+        return result;
+    }
+
+    // Sắp xếp giảm dần theo đơn giá
+    public void sapXepGiamDanTheoDonGia() {
+        Collections.sort(danhSachSach, new Comparator<Sach>() {
+            @Override
+            public int compare(Sach s1, Sach s2) {
+                return Double.compare(s2.donGia, s1.donGia);  // Sắp xếp giảm dần
+            }
+        });
+    }
+
+    // Sắp xếp giảm dần theo số lượng
+    public void sapXepGiamDanTheoSoLuong() {
+        Collections.sort(danhSachSach, new Comparator<Sach>() {
+            @Override
+            public int compare(Sach s1, Sach s2) {
+                return Integer.compare(s2.soLuong, s1.soLuong);  // Sắp xếp giảm dần
+            }
+        });
     }
 }

@@ -59,24 +59,25 @@ public class TestThuVien {
                 }
             }
 
-            // Xuất danh sách các loại sách
-            System.out.println("Danh sách các loại sách:");
-            thuVien.xuatDanhSach();
+            // Xuất danh sách sách chưa sắp xếp
+            System.out.println("Danh sách sách chưa sắp xếp:");
+            for (Sach sach : thuVien.getDanhSachSach()) {
+                System.out.println(sach.toString());
+            }
 
-            // Tính tổng thành tiền sách giáo khoa
-            System.out.println("Tổng thành tiền sách giáo khoa: " + thuVien.tongThanhTienSachGiaoKhoa());
+            // Sắp xếp giảm dần theo đơn giá và in ra kết quả
+            thuVien.sapXepGiamDanTheoDonGia();
+            System.out.println("\nSắp xếp giảm dần theo đơn giá:");
+            for (Sach sach : thuVien.getDanhSachSach()) {
+                System.out.println(sach.toString());
+            }
 
-            // Tính tổng thành tiền sách tham khảo
-            System.out.println("Tổng thành tiền sách tham khảo: " + thuVien.tongThanhTienSachThamKhao());
-
-            // Tính trung bình cộng đơn giá sách tham khảo
-            System.out.println("Trung bình đơn giá sách tham khảo: " + thuVien.trungBinhDonGiaSachThamKhao());
-
-            // Xuất các sách giáo khoa của nhà xuất bản X
-            System.out.print("Nhập tên nhà xuất bản để tìm sách giáo khoa: ");
-            String nhaXuatBan = sc.nextLine();
-            System.out.println("Danh sách sách giáo khoa của nhà xuất bản " + nhaXuatBan + ":");
-            thuVien.xuatSachGiaoKhoaNhaXuatBan(nhaXuatBan);
+            // Sắp xếp giảm dần theo số lượng và in ra kết quả
+            thuVien.sapXepGiamDanTheoSoLuong();
+            System.out.println("\nSắp xếp giảm dần theo số lượng:");
+            for (Sach sach : thuVien.getDanhSachSach()) {
+                System.out.println(sach.toString());
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
