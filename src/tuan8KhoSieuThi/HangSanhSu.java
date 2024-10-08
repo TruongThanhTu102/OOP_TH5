@@ -1,35 +1,58 @@
 package tuan8KhoSieuThi;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.Period;
+import java.util.concurrent.TimeUnit;
 
-class HangSanhSu extends HangHoa {
-    private String nhaSanXuat;
-    private LocalDate ngayNhapKho;
+public class HangSanhSu extends HangHoa{
+	public String nhaSX;
+	public LocalDate ngayNhapKho;
+	public HangSanhSu(String maHang, String tenHang, int soLuongTon, double gia, String nhaSX, LocalDate ngayNhapKho) {
+		super(maHang, tenHang, soLuongTon, gia);
+		this.nhaSX = nhaSX;
+		this.ngayNhapKho = ngayNhapKho;
+	}
+	public String getNhaSX() {
+		return nhaSX;
+	}
+	public void setNhaSX(String nhaSX) {
+		this.nhaSX = nhaSX;
+	}
+	public LocalDate getNgayNhapKho() {
+		return ngayNhapKho;
+	}
+	public void setNgayNhapKho(LocalDate ngayNhapKho) {
+		if (ngayNhapKho.isAfter(LocalDate.now())) 
+			this.ngayNhapKho = LocalDate.now();
+		else 
+			this.ngayNhapKho = ngayNhapKho;
 
-    public HangSanhSu(String maHang, String tenHang, int soLuongTon, double donGia, String nhaSanXuat, LocalDate ngayNhapKho) {
-        super(maHang, tenHang, soLuongTon, donGia);
-        this.nhaSanXuat = nhaSanXuat;
-        this.ngayNhapKho = ngayNhapKho;
-    }
 
-    @Override
-    public double tinhVAT() {
-        return donGia * 0.10;
-    }
+	}
+	@Override
+	public double tinhVAT() {
+		
+		return gia * 0.1;
+	}
+	 
 
-    @Override
-    public String danhGiaMucDoBanBuon() {
-        if (soLuongTon > 50 && ngayNhapKho.isBefore(LocalDate.now().minusDays(10))) {
-            return "Bán chậm";
-        }
-        return "Không đánh giá";
-    }
+	@Override
+	public String danhGia() {
+		Period age = Period.between(ngayNhapKho, LocalDate.now());
+		int days = age.getDays();
+		
+		if(soLuongTon > 50 && days > 10) {
+			return "Bán chậm";
+		}
+		return "Không đánh giá.";
 
-    @Override
-    public String toString() {
-        return super.toString() + 
-               String.format("|%-15s|%-15s|\n", "Nhà sản xuất", "Ngày nhập") + 
-               String.format("|%-15s|%-15s|\n", nhaSanXuat, ngayNhapKho);
-    }
+	}
+	@Override
+	public String toString() {
+	    return super.toString() + String.format("%-15s|%-15s|%-20s|%-10s|", 
+	                         getNhaSX(), ngayNhapKho,
+	                         danhGia(), super.decimalFormat.format(tinhVAT()));
+	}
+	
+
 }

@@ -1,31 +1,51 @@
 package tuan8KhoSieuThi;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
-class HangThucPham extends HangHoa {
-    private LocalDate ngaySanXuat;
-    private LocalDate ngayHetHan;
+public class HangThucPham extends HangHoa {
+    private LocalDate ngaySX, ngayHH;
     private String nhaCungCap;
 
-    public HangThucPham(String maHang, String tenHang, int soLuongTon, double donGia, LocalDate ngaySanXuat, LocalDate ngayHetHan, String nhaCungCap) {
-        super(maHang, tenHang, soLuongTon, donGia);
-        if (ngayHetHan.isBefore(ngaySanXuat)) {
-            throw new IllegalArgumentException("Ngày hết hạn phải sau ngày sản xuất");
-        }
-        this.ngaySanXuat = ngaySanXuat;
-        this.ngayHetHan = ngayHetHan;
+    public HangThucPham(String maHang, String tenHang, int soLuongTon, double gia, LocalDate ngaySX, LocalDate ngayHH, String nhaCungCap) {
+        super(maHang, tenHang, soLuongTon, gia);
+        if (ngayHH.isBefore(ngaySX)) throw new IllegalArgumentException("Ngày hết hạn phải sau ngày sản xuất!!");
+        this.ngaySX = ngaySX;
+        this.ngayHH = ngayHH;
+        this.nhaCungCap = nhaCungCap;
+    }
+
+    public LocalDate getNgaySX() {
+        return ngaySX;
+    }
+
+    public void setNgaySX(LocalDate ngaySX) {
+        this.ngaySX = ngaySX;
+    }
+
+    public LocalDate getNgayHH() {
+        return ngayHH;
+    }
+
+    public void setNgayHH(LocalDate ngayHH) {
+        this.ngayHH = ngayHH;
+    }
+
+    public String getNhaCungCap() {
+        return nhaCungCap;
+    }
+
+    public void setNhaCungCap(String nhaCungCap) {
         this.nhaCungCap = nhaCungCap;
     }
 
     @Override
     public double tinhVAT() {
-        return donGia * 0.05;
+        return gia * 0.05;
     }
 
     @Override
-    public String danhGiaMucDoBanBuon() {
-        if (soLuongTon > 0 && ngayHetHan.isBefore(LocalDate.now())) {
+    public String danhGia() {
+        if (soLuongTon > 0 && ngayHH.isBefore(LocalDate.now())) {
             return "Khó bán";
         }
         return "Không đánh giá";
@@ -33,8 +53,8 @@ class HangThucPham extends HangHoa {
 
     @Override
     public String toString() {
-        return super.toString() +
-               String.format("|%-15s|%-10s|%-10s|\n", "Nhà cung cấp", "NSX", "HSD") + 
-               String.format("|%-15s|%-10s|%-10s|\n", nhaCungCap, ngaySanXuat, ngayHetHan);
+        return super.toString() + String.format("%-15s|%-15s|%-20s|%-10s|%-10s|", 
+                ngaySX, ngayHH, getNhaCungCap(), danhGia(), super.decimalFormat.format(tinhVAT()));
     }
 }
+
