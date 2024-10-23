@@ -28,11 +28,13 @@ public class QuanLyPhongHoc {
 		return null;
 	}
 	public String inDanhSach() {
-		String str = " ";
-		for(PhongHoc ph : danhSach) {
-			str += "\n" + ph;
-		}
-		return str;
+	    StringBuilder str = new StringBuilder();
+	    str.append(String.format("|%-10s|%-10s|%-10s|%-10s|%-15s|%-10s|\n", 
+	            "Mã Phòng", "Dãy Nhà", "Diện Tích", "Số Bóng", "Có Máy Chiếu/60 máy", "Đạt Chuẩn"));
+	    for (PhongHoc ph : danhSach) {
+	        str.append(ph.toString()).append("\n");
+	    }
+	    return str.toString();
 	}
 	public String inPhongDatChuan() {
 		String str = " ";
