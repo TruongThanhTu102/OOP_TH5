@@ -22,7 +22,7 @@ public class PhongLyThuyet extends PhongHoc{
 	    }
 	 @Override
 		public String toString() {
-		    return super.toString() + String.format("%-15s|%-10s", 
+		    return super.toString() + String.format("|%-27s|%-10s|", 
 		                         getCoMayChieu(), phongDatChuan());
 		}
 }

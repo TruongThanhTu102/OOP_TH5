@@ -74,7 +74,7 @@ public class testPhongHoc {
     public static void nhapCung(QuanLyPhongHoc ds) throws Exception {
         ds.themPhongHoc(new PhongLyThuyet("LT101", "A1", 100.0, 10, "Có"));
         ds.themPhongHoc(new PhongMayTinh("MT201", "B2", 120.0, 12, 60));
-        ds.themPhongHoc(new PhongThiNghiem("TN301", "C3", 150.0, 15, "Hóa học", true, 30));
+        ds.themPhongHoc(new PhongThiNghiem("TN301", "C3", 150.0, 15,"Có",true, 30));
         System.out.println("Đã thêm các phòng học mẫu vào danh sách.");
     }
 
