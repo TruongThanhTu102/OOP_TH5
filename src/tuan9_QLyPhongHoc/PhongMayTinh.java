@@ -24,7 +24,7 @@ public class PhongMayTinh extends PhongHoc{
     }
  @Override
 	public String toString() {
-	    return super.toString() + String.format("%-15d|%-10s", 
+	    return super.toString() + String.format("|%-27d|%-10s|", 
 	                         getSoMayTinh(), phongDatChuan());
 	}
 }

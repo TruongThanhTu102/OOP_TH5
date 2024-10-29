@@ -31,14 +31,14 @@ public class PhongThiNghiem extends PhongHoc{
 	}
 	@Override
     public String phongDatChuan() {
-        if(duAnhSang()==true && coBonRua) {
+        if(duAnhSang()==true && coBonRua ) {
         	return "Đạt chuẩn";
         }else 
         	return "Không đạt chuẩn!";
     }
  @Override
 	public String toString() {
-	    return super.toString() + String.format("%-10s", 
+	    return super.toString() + String.format("|%-27s|%-10s|", isCoBonRua(),
 	                          phongDatChuan());
 	}
 }
